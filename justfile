@@ -31,4 +31,4 @@ buf-lint-fix:
 # bufのコード生成
 [group('buf')]
 buf-gen:
-    buf generate --template proto/file_box/files/buf.gen.yaml
+    buf generate
