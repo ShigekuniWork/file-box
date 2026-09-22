@@ -5,6 +5,8 @@ pre-commit:
       run: just go-lint
     - name: golang-audit
       run: just go-audit
+    - name: buf-linter
+      run: just buf-lint
 
 pre-push:
   jobs:

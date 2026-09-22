@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package file_box.metadata.v1;
+
+option go_package = "file-box/proto/file_box/metadata/v1";

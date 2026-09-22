@@ -15,3 +15,20 @@ go-lint-fix:
 [group('audit')]
 go-audit:
     govulncheck ./...
+
+# bufのformat & lint
+[group('buf')]
+buf-lint:
+    buf lint
+    buf format --diff --exit-code
+
+# bufのformat & lint
+[group('buf')]
+buf-lint-fix:
+    buf lint
+    buf format -w
+
+# bufのコード生成
+[group('buf')]
+buf-gen:
+    buf generate --template proto/file_box/metadata/buf.gen.yaml
