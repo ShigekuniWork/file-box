@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package file_box.files.v1;
+
+import "file_box/files/v1/session.proto";
+import "google/api/annotations.proto";
+
+option go_package = "file-box/gen/file_box/files/v1";
+
+// ファイルのアップロードと管理を行う。
+service FileService {
+  // 新しいアップロードセッションを開始する。
+  //
+  // 返されたセッションIDは、後続のアップロード処理でセッションを識別するために使用する。
+  rpc StartUploadSession(StartUploadSessionRequest) returns (StartUploadSessionResponse) {
+    option (google.api.http) = {post: "/v1/{name=spaces/*/uploadSessions/*}:start"};
+  }
+}
+
+// アップロードセッションを開始するためのリクエスト。
+message StartUploadSessionRequest {}
+
+// 開始されたアップロードセッション。
+message StartUploadSessionResponse {
+  SessionId session_id = 1;
+}

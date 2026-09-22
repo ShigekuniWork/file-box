@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package file_box.files.v1;
+
+option go_package = "file-box/gen/file_box/files/v1";
+
+// アップロードセッションを識別するID。
+message SessionId {
+  // 不透明な識別子。セッションの完了、破棄、または期限切れまで有効。
+  string value = 1;
+}
