@@ -3,35 +3,46 @@ layer: 'application'
 
 tasks:
   security/gitleaks:
+    type: test
+    description: 'ステージ済みの変更からシークレットを検出する。'
     command: 'gitleaks git --pre-commit --redact --staged --verbose'
     options:
       cache: false
+      runInCI: true
 
   go/lint:
+    type: test
+    description: 'Go のソースコードを静的解析する。'
     command: 'golangci-lint run ./...'
+    options:
+      runInCI: true
 
   go/lint-fix:
+    type: run
+    preset: utility
+    description: 'Go の静的解析で検出された問題を自動修正する。'
     command: 'golangci-lint run ./... --fix'
+    options:
+      runInCI: false
 
   go/audit:
+    type: test
+    description: 'Go の依存関係に既知の脆弱性がないか検査する。'
     command: 'govulncheck ./...'
+    options:
+      runInCI: true
 
   go/test:
+    type: test
+    description: '生成パッケージを除外して Go のテストを実行する。'
     command: "go test $(go list ./... | grep -v '/gen/')"
-
-  buf/lint:
-    script: |
-      buf lint
-      buf format --diff --exit-code
-
-  buf/lint-fix:
-    script: |
-      buf lint
-      buf format -w
-
-  buf/generate:
-    command: 'buf generate'
-
+    options:
+      runInCI: true
 
   atlas:
+    type: run
+    preset: utility
+    description: 'Atlas のデータベーススキーマツールを実行する。'
     command: 'atlas'
+    options:
+      runInCI: false
