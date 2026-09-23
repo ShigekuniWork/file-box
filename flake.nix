@@ -19,6 +19,7 @@
             atlas
             golangci-lint
             govulncheck
+            gitleaks
             lefthook
           ];
         };

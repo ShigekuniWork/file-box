@@ -2,6 +2,11 @@ language: 'go'
 layer: 'application'
 
 tasks:
+  security/gitleaks:
+    command: 'gitleaks git --pre-commit --redact --staged --verbose'
+    options:
+      cache: false
+
   go/lint:
     command: 'golangci-lint run ./...'
 
