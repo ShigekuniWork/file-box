@@ -1,0 +1,43 @@
+language: 'unknown'
+layer: 'library'
+
+project:
+  description: 'Protocol Buffers の定義と生成設定を管理する。'
+
+tasks:
+  buf/lint:
+    type: test
+    description: 'Protocol Buffers ファイルを lint し、フォーマットを検査する。'
+    script: |
+      buf lint
+      buf format --diff --exit-code
+    options:
+      runFromWorkspaceRoot: true
+      runInCI: true
+
+  buf/lint-fix:
+    type: run
+    preset: utility
+    description: 'Protocol Buffers ファイルを lint してインプレースでフォーマットする。'
+    script: |
+      buf lint
+      buf format -w
+    options:
+      runFromWorkspaceRoot: true
+      runInCI: false
+
+  buf/breaking:
+    type: test
+    description: 'Protocol Buffers の後方互換性を検査する。'
+    command: "buf breaking --against '.git#branch=main'"
+    options:
+      runFromWorkspaceRoot: true
+      runInCI: true
+
+  buf/generate:
+    type: build
+    description: 'Protocol Buffers のソースコードを生成する。'
+    command: 'buf generate'
+    options:
+      runFromWorkspaceRoot: true
+      runInCI: true
