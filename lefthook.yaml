@@ -1,5 +1,7 @@
 pre-commit:
   jobs:
+    - name: gitleaks
+      run: moon run root:security/gitleaks
     - name: golang-linter
       glob: "*.go"
       run: moon run root:go/lint
