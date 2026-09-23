@@ -1,0 +1,32 @@
+language: 'go'
+layer: 'application'
+
+tasks:
+  go/lint:
+    command: 'golangci-lint run ./...'
+
+  go/lint-fix:
+    command: 'golangci-lint run ./... --fix'
+
+  go/audit:
+    command: 'govulncheck ./...'
+
+  go/test:
+    command: "go test $(go list ./... | grep -v '/gen/')"
+
+  buf/lint:
+    script: |
+      buf lint
+      buf format --diff --exit-code
+
+  buf/lint-fix:
+    script: |
+      buf lint
+      buf format -w
+
+  buf/generate:
+    command: 'buf generate'
+
+
+  atlas:
+    command: 'atlas'

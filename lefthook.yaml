@@ -2,16 +2,16 @@ pre-commit:
   jobs:
     - name: golang-linter
       glob: "*.go"
-      run: just go-lint
+      run: moon run root:go/lint
     - name: golang-audit
-      run: just go-audit
+      run: moon run root:go/audit
     - name: buf-linter
-      run: just buf-lint
+      run: moon run root:buf/lint
 
 pre-push:
   jobs:
     - name: golang-audit
-      run: just go-audit
+      run: moon run root:go/audit
 
 commit-msg:
   jobs:
