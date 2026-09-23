@@ -33,3 +33,5 @@ go.work.sum
 
 # Protobuf
 gen/
+.moon/cache/
+.direnv/
